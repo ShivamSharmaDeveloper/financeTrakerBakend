@@ -17,14 +17,12 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from rest_framework_simplejwt.views import TokenRefreshView, TokenVerifyView
-from finance.views import CustomTokenObtainPairView
+from finance.views import RootAPIView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    # JWT Authentication endpoints
-    path('api/auth/login/', CustomTokenObtainPairView.as_view(), name='token_obtain_pair'),
+    path('api/', RootAPIView.as_view(), name='api-root'),
+    path('api/', include('finance.urls')),
     path('api/auth/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
     path('api/auth/validate-token/', TokenVerifyView.as_view(), name='token_verify'),
-    # API endpoints
-    path('api/', include('finance.urls')),
 ]

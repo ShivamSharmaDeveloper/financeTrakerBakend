@@ -453,18 +453,26 @@ class RootAPIView(APIView):
     permission_classes = [AllowAny]
     
     def get(self, request):
-        return Response({
-            'status': 'ok',
-            'version': '1.0',
-            'endpoints': {
-                'auth': {
-                    'login': '/api/auth/login/',
-                    'logout': '/api/auth/logout/',
-                    'user': '/api/auth/user/'
-                },
-                'categories': '/api/categories/',
-                'transactions': '/api/transactions/',
-                'budgets': '/api/budgets/',
-                'dashboard': '/api/dashboard/'
+        try:
+            api_info = {
+                'status': 'ok',
+                'version': '1.0',
+                'endpoints': {
+                    'auth': {
+                        'login': '/api/auth/login',
+                        'logout': '/api/auth/logout',
+                        'user': '/api/auth/user'
+                    },
+                    'categories': '/api/categories',
+                    'transactions': '/api/transactions',
+                    'budgets': '/api/budgets',
+                    'dashboard': '/api/dashboard'
+                }
             }
-        })
+            return Response(api_info)
+        except Exception as e:
+            return Response({
+                'status': 'error',
+                'message': str(e),
+                'detail': 'An error occurred while processing your request'
+            }, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
