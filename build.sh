@@ -11,5 +11,16 @@ python manage.py collectstatic --no-input
 # Run migrations
 python manage.py migrate
 
+# Create superuser
+python manage.py create_superuser
+
 # Start the application with gunicorn
-gunicorn budget_tracker.wsgi:application --bind 0.0.0.0:$PORT 
+gunicorn budget_tracker.wsgi:application \
+    --bind 0.0.0.0:$PORT \
+    --workers 4 \
+    --threads 4 \
+    --timeout 120 \
+    --access-logfile - \
+    --error-logfile - \
+    --capture-output \
+    --enable-stdio-inheritance 
