@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from rest_framework import generics
-from rest_framework.permissions import IsAuthenticated
+from rest_framework.permissions import IsAuthenticated, AllowAny
 from .models import Category
 from .serializers import CategorySerializer
 from django.db.models import Sum, F, Q
@@ -448,3 +448,23 @@ class LogoutView(APIView):
                 'message': 'Error logging out',
                 'error': str(e)
             }, status=status.HTTP_400_BAD_REQUEST)
+
+class RootAPIView(APIView):
+    permission_classes = [AllowAny]
+    
+    def get(self, request):
+        return Response({
+            'status': 'ok',
+            'version': '1.0',
+            'endpoints': {
+                'auth': {
+                    'login': '/api/auth/login/',
+                    'logout': '/api/auth/logout/',
+                    'user': '/api/auth/user/'
+                },
+                'categories': '/api/categories/',
+                'transactions': '/api/transactions/',
+                'budgets': '/api/budgets/',
+                'dashboard': '/api/dashboard/'
+            }
+        })
