@@ -3,8 +3,14 @@ from django.contrib.auth.models import User
 from django.core.validators import MinValueValidator
 
 class Category(models.Model):
+    CATEGORY_TYPES = (
+        ('income', 'Income'),
+        ('expense', 'Expense'),
+    )
+
     name = models.CharField(max_length=100)
     description = models.TextField(blank=True)
+    type = models.CharField(max_length=7, choices=CATEGORY_TYPES, default='expense')
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
