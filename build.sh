@@ -2,25 +2,26 @@
 # exit on error
 set -o errexit
 
-# Install dependencies
-pip install -r requirements.txt
+echo "Installing dependencies..."
+pip install -r requirements.txt --no-cache-dir
 
-# Collect static files
-python manage.py collectstatic --no-input
+echo "Collecting static files..."
+python manage.py collectstatic --no-input --clear
 
-# Run migrations
-python manage.py migrate
+echo "Running migrations..."
+python manage.py migrate --noinput
 
-# Create superuser
+echo "Creating superuser..."
 python manage.py create_superuser
 
-# Start the application with gunicorn
-gunicorn budget_tracker.wsgi:application \
+echo "Starting Gunicorn..."
+exec gunicorn budget_tracker.wsgi:application \
     --bind 0.0.0.0:$PORT \
-    --workers 4 \
-    --threads 4 \
-    --timeout 120 \
+    --workers 2 \
+    --threads 2 \
+    --timeout 60 \
     --access-logfile - \
     --error-logfile - \
     --capture-output \
-    --enable-stdio-inheritance 
+    --enable-stdio-inheritance \
+    --log-level debug 
