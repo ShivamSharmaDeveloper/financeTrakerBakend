@@ -9,3 +9,5 @@ sqlparse==0.4.4
 asgiref==3.7.2
 PyJWT==2.8.0
 cryptography==42.0.2
+whitenoise==6.6.0
+gunicorn==21.2.0
