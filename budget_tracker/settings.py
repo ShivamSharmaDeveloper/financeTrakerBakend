@@ -31,7 +31,7 @@ SECRET_KEY = os.getenv('DJANGO_SECRET_KEY', 'your-default-secret-key-for-dev')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.getenv('DJANGO_DEBUG', 'False') == 'True'
 
-ALLOWED_HOSTS = ['localhost', '127.0.0.1', 'https://financetrakerbakend.onrender.com']
+ALLOWED_HOSTS = ['localhost', '127.0.0.1', 'financetrakerbakend.onrender.com']
 
 
 # Application definition
