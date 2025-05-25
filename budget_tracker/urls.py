@@ -21,8 +21,10 @@ from finance.views import RootAPIView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('api/', RootAPIView.as_view(), name='api-root'),
-    path('api/', include('finance.urls')),
-    path('api/auth/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
-    path('api/auth/validate-token/', TokenVerifyView.as_view(), name='token_verify'),
+    path('api/', include([
+        path('', RootAPIView.as_view(), name='api-root'),
+        path('', include('finance.urls')),
+        path('auth/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
+        path('auth/validate-token/', TokenVerifyView.as_view(), name='token_verify'),
+    ])),
 ]

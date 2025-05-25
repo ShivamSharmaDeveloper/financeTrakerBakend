@@ -459,14 +459,14 @@ class RootAPIView(APIView):
                 'version': '1.0',
                 'endpoints': {
                     'auth': {
-                        'login': '/api/auth/login',
-                        'logout': '/api/auth/logout',
-                        'user': '/api/auth/user'
+                        'login': '/api/auth/login/',
+                        'logout': '/api/auth/logout/',
+                        'user': '/api/auth/user/'
                     },
-                    'categories': '/api/categories',
-                    'transactions': '/api/transactions',
-                    'budgets': '/api/budgets',
-                    'dashboard': '/api/dashboard'
+                    'categories': '/api/categories/',
+                    'transactions': '/api/transactions/',
+                    'budgets': '/api/budgets/',
+                    'dashboard': '/api/dashboard/'
                 }
             }
             return Response(api_info)
