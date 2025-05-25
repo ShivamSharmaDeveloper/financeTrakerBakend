@@ -29,24 +29,20 @@ A Django REST API backend for the Personal Budget Tracker application.
 ## Installation
 
 1. Clone the repository
-2. Navigate to the backend directory:
-   ```bash
-   cd backend
-   ```
-3. Create and activate a virtual environment:
+2. Create and activate a virtual environment:
    ```bash
    python -m venv env
    source env/bin/activate  # On Windows: env\Scripts\activate
    ```
-4. Install dependencies:
+3. Install dependencies:
    ```bash
    pip install -r requirements.txt
    ```
-5. Apply migrations:
+4. Apply migrations:
    ```bash
    python manage.py migrate
    ```
-6. Create a superuser:
+5. Create a superuser:
    ```bash
    python manage.py createsuperuser
    ```
